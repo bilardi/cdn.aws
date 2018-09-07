@@ -1,0 +1,4 @@
+template_path: templates/production/sns.yaml
+parameters:
+  Project: your-project-name
+  EmailAddress: your@email.net

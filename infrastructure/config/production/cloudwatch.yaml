@@ -1,0 +1,5 @@
+template_path: templates/production/cloudwatch.yaml
+parameters:
+  SNSTopicName: !stack_output production/sns::SNSTopicName
+  DashboardName: your-cdn-resources
+  BucketName: !stack_output production/s3::BucketName

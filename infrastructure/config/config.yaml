@@ -1,0 +1,4 @@
+project_code: your-stack-name-prefix
+region: eu-west-1
+template_bucket_name: your-custom-cloudformation-templates
+template_key_prefix: your-project-name

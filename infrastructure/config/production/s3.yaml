@@ -1,0 +1,3 @@
+template_path: templates/production/s3.yaml
+parameters:
+    BucketName: your.bucket.name
