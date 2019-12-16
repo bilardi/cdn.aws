@@ -4,6 +4,6 @@ grep your -R config/*
 # edit your custom configuration and then
 pip install sceptre
 export AWS_PROFILE=your-account
-sceptre validate-template production s3
-sceptre launch-env production
+sceptre validate production/s3
+sceptre launch production
 ```

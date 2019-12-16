@@ -2,3 +2,6 @@ project_code: your-stack-name-prefix
 region: eu-west-1
 template_bucket_name: your-custom-cloudformation-templates
 template_key_prefix: your-project-name
+cdn_bucket_name: your.bucket.name
+dashboard_name: your-cdn-resources
+email_address: your@email.net

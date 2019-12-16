@@ -1,4 +1,4 @@
-template_path: templates/production/sns.yaml
+template_path: production/sns.yaml
 parameters:
-  Project: your-project-name
-  EmailAddress: your@email.net
+  Project: {{ project_code }}
+  EmailAddress: {{ email_address }}
