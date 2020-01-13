@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Metrics, Alarms and Dashboard
+
+Parameters:
+  Project
+    Description: Project name
+    Type: String
+
+  DashboardName:
+    Description: Dashboard name
+    Type: String
+
+  BucketName:
+    Description: Bucket name
+    Type: String
+
+Resources:
+  BucketSizeBytesAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/S3
+      MetricName: BucketSizeBytes
+      AlarmName: !Sub "BucketSizeBytes of ${BucketName}"
+      AlarmDescription: !Sub "BucketSizeBytes of ${BucketName} over the free usage tier"
+      # InsufficientDataActions
+      #   - !Sub "${Project}-notification"
+      # OKActions:
+      #   - !Sub "${Project}-notification"
+      AlarmActions:
+        - !Sub "${Project}-notification"
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      EvaluationPeriods: 3
+      Period: 300
+      Statistic: Maximum
+      Threshold: 40000000
+      TreatMissingData: missing
+
+  Dashboard:
+    Type: AWS::CloudWatch::Dashboard
+    Properties:
+      DashboardName: !Ref DashboardName
+      DashboardBody: !Sub |
+        {
+            "widgets": [
+                {
+                    "type": "metric",
+                    "x": 0,
+                    "y": 0,
+                    "width": 12,
+                    "height": 6,
+                    "properties": {
+                        "view": "timeSeries",
+                        "stacked": false,
+                        "metrics": [
+                            [ "AWS/S3", "BucketSizeBytes", "StorageType", "StandardStorage", "BucketName", "my-pictures-protected" ]
+                        ],
+                        "region": "eu-west-1"
+                    }
+                },
+                {
+                    "type": "metric",
+                    "x": 12,
+                    "y": 0,
+                    "width": 12,
+                    "height": 6,
+                    "properties": {
+                        "view": "timeSeries",
+                        "stacked": false,
+                        "metrics": [
+                            [ "AWS/S3", "NumberOfObjects", "StorageType", "AllStorageTypes", "BucketName", "my-pictures-protected" ]
+                        ],
+                        "region": "eu-west-1"
+                    }
+                }
+            ]
+        }
+
+Outputs:
+  DashboardUrl:
+    Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home#dashboards:name=${Dashboard}"

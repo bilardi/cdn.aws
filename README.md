@@ -17,10 +17,21 @@ If you don't save your custom configurations on a repository versioned
 pip install awscli --upgrade --user
 aws configuration --profile your-account
 git clone https://github.com/bilardi/cds.aws.git
-cd cds.aws/infrastructure/
-more README.md
-# and if you don't save your custom configurations on a repository versioned, then copy all on s3
-aws s3 cp . s3://your-custom-configurations-bucket/cdn.aws/ --recursive --exclude "*" --include "*.json" --include "*.yaml" --include "*yml" --profile your-account
-# and if you have to modify it, then copy all on your local
-aws s3 cp s3://your-custom-configurations-bucket/cdn.aws/ . --recursive --exclude "*" --include "*.json" --include "*.yaml" --include "*yml" --profile your-account
 ```
+
+### Cloudformation
+If you want to create your infrastructure by only awscli, follow this [README.md](https://github.com/bilardi/cdn.aws/infrastructure/awscli/README.md) or run
+```sh
+cd cds.aws/infrastructure/awscli/
+more README.md
+```
+
+### Other tools
+If you want to create your infrastructure another tool, see this [directory](https://github.com/bilardi/cdn.aws/infrastructure) or run
+```sh
+ls cds.aws/infrastructure/
+```
+where you'll find some examples with own README.md.
+
+## License
+This package is released under the MIT license.  See [LICENSE](LICENSE) for details.

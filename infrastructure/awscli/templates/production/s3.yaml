@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Stack S3
+Parameters:
+  BucketName:
+    Description: Bucket name
+    Type: String
+
+Resources:
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal: '*'
+          Action:
+            - s3:GetObject
+          Resource: !Join [ '', [ !GetAtt WebsiteBucket.Arn, /* ]]
+
+Outputs:
+  BucketName:
+    Description: Bucket name
+    Value: !Ref BucketName
+  WebsiteDomainName:
+    Description: Bucket FQDN
+    Value: !GetAtt WebsiteBucket.DomainName
+  WebsiteBucketWebsiteUrl:
+    Description: Bucket URL
+    Value: !GetAtt WebsiteBucket.WebsiteURL

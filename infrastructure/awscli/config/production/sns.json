@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "Project",
+    "ParameterValue": "your-stack-name-prefix"
+  },
+  {
+    "ParameterKey": "EmailAddress",
+    "ParameterValue": "your@email.net"
+  }
+]

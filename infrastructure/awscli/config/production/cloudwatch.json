@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "Project",
+    "ParameterValue": "your-stack-name-prefix"
+  },
+  {
+    "ParameterKey": "DashboardName",
+    "ParameterValue": "your-cdn-resources"
+  },
+  {
+    "ParameterKey": "BucketName",
+    "ParameterValue": "your.bucket.name"
+  }
+]
